@@ -5,7 +5,8 @@ import numpy as np
 
 def CameraFunction():
     while 1:
-        Model.LoadModel()
+        Model.ModelTest()
+        Model.LoadModel(filename="Useweights.h5")
         Face = GetFace()
         FaceArray = np.array(Face)
         FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
@@ -21,22 +22,11 @@ if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
 
-    train = True
+    train = False
     if train == True:
         Model.GetHistory()
     else:
-        while 1:
-            Model.LoadModel()
-            Face = GetFace()
-            FaceArray = np.array(Face)
-            FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
-
-            Prediction = Model.Predict(FaceArray)
-
-            PredictionList = Prediction.tolist()[0]
-            LabelIndex = Prediction.argmax(axis=-1).tolist()[0]
-            print(emotionArray[LabelIndex])
-            print(Prediction)
+        CameraFunction()
 
 
 
