@@ -4,9 +4,9 @@ import tensorflow as tf
 import numpy as np
 
 def CameraFunction():
+    Model.LoadModel(filename="NewWeights.h5")
     Model.ModelTest()
     while 1:
-        Model.LoadModel(filename="NewWeights.h5")
         Face = GetFace()
         FaceArray = np.array(Face)
         FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
