@@ -113,7 +113,7 @@ class FacialDetectionModel:
         history = self.model.fit(
         train_generator,
         steps_per_epoch=len(train_generator),
-        epochs=5,
+        epochs=50,
         validation_data=validation_generator,
         validation_steps=len(validation_generator),
         callbacks=[checkpoint_callback]

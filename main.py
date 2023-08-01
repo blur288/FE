@@ -21,12 +21,11 @@ emotionArray = ["angry", "contempt", "disgust", "fear", "happy", "neutral", "sad
 if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
-    Model.GetHistory()
 
-    train = False
+    train = True
     if train == True:
         Model.GetHistory()
-    else:
+    if train == False:
         CameraFunction()
 
 
