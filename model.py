@@ -127,3 +127,21 @@ class FacialDetectionModel:
     def Predict(self, image):
         prediciton = self.model.predict(image)
         return prediciton
+    def SwitchImage(self, imagePath):
+        train_datagen = ImageDataGenerator(
+            width_shift_range = 0.1,        # Randomly shift the width of images by up to 10%
+            height_shift_range = 0.1,       # Randomly shift the height of images by up to 10%
+            horizontal_flip = True,         # Flip images horizontally at random
+            rescale = 1./255,               # Rescale pixel values to be between 0 and 1
+            validation_split = 0.2          # Set aside 20% of the data for validation
+        )
+
+        train_generator = train_datagen.flow_from_directory(
+            directory = imagePath,           # Directory containing the training data
+            target_size = (48, 48),          # Resizes all images to 48x48 pixels
+            batch_size = 32,                 # Number of images per batch
+            color_mode = "grayscale",        # Converts the images to grayscale
+            class_mode = "categorical",      # Classifies the images into 7 categories
+            subset = "training"              # Uses the training subset of the data
+        )
+        return train_generator

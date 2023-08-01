@@ -2,14 +2,17 @@ from model import FacialDetectionModel
 from face import GetFace
 import tensorflow as tf
 import numpy as np
+import cv2
 
 def CameraFunction():
     Model.LoadModel(filename="NewWeights.h5")
     Model.ModelTest()
     while 1:
         Face = GetFace()
+        cv2.imwrite("./picture/test.jpg", Face)
         FaceArray = np.array(Face)
-        FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
+        FaceArray = FaceArray/255.0
+        FaceArray = tf.reshape(FaceArray, [1, 48, 48, 1])
         Prediction = Model.Predict(FaceArray)
         PredictionList = Prediction.tolist()[0]
         LabelIndex = Prediction.argmax(axis=-1).tolist()[0]
