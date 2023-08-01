@@ -150,14 +150,14 @@ def initDataGens():
 
 def initDataSets(train, test, train_datagen, valid_datagen, test_datagen, classes_):
     
-    train_dataset  = train_datagen.flow_from_directory(directory = '../archive/train1',
+    train_dataset  = train_datagen.flow_from_directory(directory = './fer2013/train',
                                                    target_size = (48,48),
                                                    class_mode = 'categorical',
                                                    classes=classes_,
                                                    subset = 'training',
                                                    batch_size = 64)
 
-    valid_dataset = train_datagen.flow_from_directory(directory = '../archive/train1',
+    valid_dataset = train_datagen.flow_from_directory(directory = './fer2013/train',
                                                   target_size = (48,48),
                                                   class_mode = 'categorical',
                                                   classes=classes_,
@@ -172,7 +172,7 @@ def initDataSets(train, test, train_datagen, valid_datagen, test_datagen, classe
 #                                                   subset = 'validation',
 #                                                   batch_size = 64)
 
-    test_dataset = test_datagen.flow_from_directory(directory = '../archive/test1',
+    test_dataset = test_datagen.flow_from_directory(directory = '../fer2013/test',
                                                   target_size = (48,48),
                                                   class_mode = 'categorical',
                                                   classes=classes_,
