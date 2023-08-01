@@ -25,7 +25,7 @@ if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
 
-    train = False
+    train = True
     if train == True:
         Model.GetHistory()
     if train == False:
