@@ -24,7 +24,7 @@ validation_datagen = ImageDataGenerator(
 train_generator = train_datagen.flow_from_directory(
     directory = train_dir,           # Directory containing the training data
     target_size = (48, 48),          # Resizes all images to 48x48 pixels
-    batch_size = 64,                 # Number of images per batch
+    batch_size = 32,                 # Number of images per batch
     color_mode = "grayscale",        # Converts the images to grayscale
     class_mode = "categorical",      # Classifies the images into 7 categories
     subset = "training"              # Uses the training subset of the data
@@ -33,7 +33,7 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = validation_datagen.flow_from_directory(
     directory = test_dir,            # Directory containing the validation data
     target_size = (48, 48),          # Resizes all images to 48x48 pixels
-    batch_size = 64,                 # Number of images per batch
+    batch_size = 32,                 # Number of images per batch
     color_mode = "grayscale",        # Converts the images to grayscale
     class_mode = "categorical",      # Classifies the images into 7 categories
     subset = "validation"            # Uses the validation subset of the data
@@ -112,7 +112,7 @@ class FacialDetectionModel:
         history = self.model.fit(
         train_generator,
         steps_per_epoch=len(train_generator),
-        epochs=50,
+        epochs=40,
         validation_data=validation_generator,
         validation_steps=len(validation_generator),
         callbacks=[checkpoint_callback]

@@ -2,7 +2,7 @@ from model import FacialDetectionModel
 
 if __name__ == "__main__":
     Model = FacialDetectionModel()
-    Model.Compile(LearningRate=0.01)
+    Model.Compile(LearningRate=0.001)
     Model.GetHistory()
 
 # # Plot the train and validation loss
