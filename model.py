@@ -98,7 +98,6 @@ class FacialDetectionModel:
         self.model.add(Dense(8, activation='softmax'))
     def Compile(self, LearningRate):
         # Compile the model with categorical cross-entropy loss, adam optimizer, and accuracy metric
-        self.model.compile(loss="categorical_crossentropy", optimizer= tf.keras.optimizers.Adam(lr=LearningRate), metrics=['accuracy'])
         self.model.compile(loss="categorical_crossentropy", optimizer= tf.keras.optimizers.Adam(learning_rate=LearningRate), metrics=['accuracy'])
     def GetHistory(self, filename="model_weights.h5"):
         checkpoint_callback = ModelCheckpoint(
