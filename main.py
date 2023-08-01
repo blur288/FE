@@ -3,14 +3,26 @@ from face import GetFace
 import tensorflow as tf
 import numpy as np
 
-emotionArray = ["angry", "disgust", "fear", "happy", "neutral", "sad", "suprise"]
+def CameraFunction():
+    while 1:
+        Model.LoadModel()
+        Face = GetFace()
+        FaceArray = np.array(Face)
+        FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
+        Prediction = Model.Predict(FaceArray)
+        PredictionList = Prediction.tolist()[0]
+        LabelIndex = Prediction.argmax(axis=-1).tolist()[0]
+        print(emotionArray[LabelIndex])
+        print(Prediction)
+
+emotionArray = ["angry", "contempt", "disgust", "fear", "happy", "neutral", "sad", "suprise"]
 
 if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
     Model.GetHistory()
 
-    train = False
+    train = True
     if train == True:
         Model.GetHistory()
     else:
