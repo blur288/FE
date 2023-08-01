@@ -2,8 +2,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import scipy
 
 # /Users/ujjawalprasad/Downloads/archive/test
-train_dir = "./archive/train" # Directory containing the training data
-test_dir = "./archive/test"  # Directory containing the validation data
+train_dir = "./fer2013/train" # Directory containing the training data
+test_dir = "./fer2013/test"  # Directory containing the validation data
 
 
 train_datagen = ImageDataGenerator(
@@ -93,7 +93,7 @@ class FacialDetectionModel:
         # Add a dropout layer with 0.5 dropout rate
         self.model.add(Dropout(0.5))
         # Add a dense layer with 7 neurons (one for each class) and softmax activation function
-        self.model.add(Dense(7, activation='softmax'))
+        self.model.add(Dense(8, activation='softmax'))
     def Compile(self, LearningRate):
         # Compile the model with categorical cross-entropy loss, adam optimizer, and accuracy metric
         self.model.compile(loss="categorical_crossentropy", optimizer= tf.keras.optimizers.Adam(learning_rate=LearningRate), metrics=['accuracy'])
@@ -114,7 +114,8 @@ class FacialDetectionModel:
         validation_data=validation_generator,
         validation_steps=len(validation_generator),
         callbacks=[checkpoint_callback]
-    )
+        )
+
     def LoadModel(self, filename="weights.h5"):
         self.model.load_weights(filename)
     def ModelTest(self):
