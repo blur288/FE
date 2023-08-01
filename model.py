@@ -1,10 +1,7 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import scipy
-<<<<<<< HEAD
 import scipy.ndimage
 import tensorflow as tf
-=======
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
 
 # /Users/ujjawalprasad/Downloads/archive/test
 train_dir = "./archive/train" # Directory containing the training data
@@ -27,11 +24,8 @@ validation_datagen = ImageDataGenerator(
 train_generator = train_datagen.flow_from_directory(
     directory = train_dir,           # Directory containing the training data
     target_size = (48, 48),          # Resizes all images to 48x48 pixels
-<<<<<<< HEAD
     batch_size = 32,                 # Number of images per batch
-=======
     batch_size = 64,                 # Number of images per batch
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
     color_mode = "grayscale",        # Converts the images to grayscale
     class_mode = "categorical",      # Classifies the images into 7 categories
     subset = "training"              # Uses the training subset of the data
@@ -40,11 +34,8 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = validation_datagen.flow_from_directory(
     directory = test_dir,            # Directory containing the validation data
     target_size = (48, 48),          # Resizes all images to 48x48 pixels
-<<<<<<< HEAD
     batch_size = 32,                 # Number of images per batch
-=======
     batch_size = 64,                 # Number of images per batch
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
     color_mode = "grayscale",        # Converts the images to grayscale
     class_mode = "categorical",      # Classifies the images into 7 categories
     subset = "validation"            # Uses the validation subset of the data
@@ -109,11 +100,8 @@ class FacialDetectionModel:
         self.model.add(Dense(7, activation='softmax'))
     def Compile(self, LearningRate):
         # Compile the model with categorical cross-entropy loss, adam optimizer, and accuracy metric
-<<<<<<< HEAD
         self.model.compile(loss="categorical_crossentropy", optimizer= tf.keras.optimizers.Adam(lr=LearningRate), metrics=['accuracy'])
-=======
         self.model.compile(loss="categorical_crossentropy", optimizer= tf.keras.optimizers.Adam(learning_rate=LearningRate), metrics=['accuracy'])
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
     def GetHistory(self, filename="model_weights.h5"):
         checkpoint_callback = ModelCheckpoint(
             filepath=filename,
@@ -127,17 +115,11 @@ class FacialDetectionModel:
         history = self.model.fit(
         train_generator,
         steps_per_epoch=len(train_generator),
-<<<<<<< HEAD
         epochs=40,
-=======
-        epochs=50,
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
         validation_data=validation_generator,
         validation_steps=len(validation_generator),
         callbacks=[checkpoint_callback]
     )
-<<<<<<< HEAD
-=======
     def LoadModel(self, filename="weights.h5"):
         self.model.load_weights(filename)
     def ModelTest(self):
@@ -146,4 +128,3 @@ class FacialDetectionModel:
     def Predict(self, image):
         prediciton = self.model.predict(image)
         return prediciton
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d

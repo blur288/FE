@@ -1,19 +1,14 @@
 from model import FacialDetectionModel
-<<<<<<< HEAD
-=======
 from face import GetFace
 import tensorflow as tf
 import numpy as np
 
 emotionArray = ["angry", "disgust", "fear", "happy", "neutral", "sad", "suprise"]
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
 
 if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
-<<<<<<< HEAD
     Model.GetHistory()
-=======
 
     train = False
     if train == True:
@@ -36,7 +31,6 @@ if __name__ == "__main__":
 
     
     #pip install opencv-python
->>>>>>> 85ae68cb7f1893f6e8f67221f25b967c912f425d
 
 # # Plot the train and validation loss
 # train_loss = history.history['loss']
