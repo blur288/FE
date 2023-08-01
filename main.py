@@ -4,9 +4,9 @@ import tensorflow as tf
 import numpy as np
 
 def CameraFunction():
+    Model.ModelTest()
     while 1:
-        Model.ModelTest()
-        Model.LoadModel(filename="Useweights.h5")
+        Model.LoadModel(filename="NewWeights.h5")
         Face = GetFace()
         FaceArray = np.array(Face)
         FaceArray = np.resize(FaceArray, (1, 48, 48, 1))
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
 
-    train = True
+    train = False
     if train == True:
         Model.GetHistory()
     if train == False:
