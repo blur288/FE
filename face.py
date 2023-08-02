@@ -5,18 +5,18 @@ def detect_bounding_box(vid):
         cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
     )
     grayscale_image = cv2.cvtColor(vid, cv2.COLOR_BGR2GRAY)
-    faces = classifier.detectMultiScale(grayscale_image, 1.1, 6, minSize=(40, 40))
+    faces = classifier.detectMultiScale(grayscale_image, 1.3, 5, minSize=(100, 100))
+    y = -1
     for (x, y, w, h) in faces:
         w = h
         height = h
         #i made the images the same length and width
         cv2.rectangle(vid, (x, y), (x + w, y + h), (0, 255, 0), 4)
-    if cv2.waitKey(1) & 0xFF == ord("c"):
+    if (y >= 0):
         print ('c')
         face = grayscale_image[y:y+height, x:x+height]
 
         face = cv2.resize(face, (48,48))
-
         return face, True
     #to take pictures, press c while its running
     #wait like 2 seconds between each picture
@@ -35,7 +35,7 @@ def GetFace():
         vid_capture.release()
         cv2.destroyAllWindows()
         return faces
-      cv2.imshow("Big Brother", vid_frame)
+      #cv2.imshow("Big Brother", vid_frame)
       if cv2.waitKey(1) & 0xFF == ord("q"):
         break
         #to stop the program, press q
