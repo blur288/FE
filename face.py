@@ -13,7 +13,6 @@ def detect_bounding_box(vid):
         #i made the images the same length and width
         cv2.rectangle(vid, (x, y), (x + w, y + h), (0, 255, 0), 4)
     if (y >= 0):
-        print ('c')
         face = grayscale_image[y:y+height, x:x+height]
 
         face = cv2.resize(face, (48,48))

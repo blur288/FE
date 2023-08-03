@@ -3,10 +3,31 @@ from face import GetFace
 import tensorflow as tf
 import numpy as np
 import cv2
+from gui import Gui
 
-def CameraFunction():
+emotionArray = ["angry", "contempt", "disgust", "fear", "happy", "neutral", "sad", "suprise"]
+
+def Convert(Values):
+    #70% Angry    Contempt 60%
+    #70% Disgust    Fear 60%
+    #70% Happy    Neutral 60%
+    #70% Sad    Surprise 60%
+
+    #[percent, percent, percent]
+    ValueStringArray = []
+    for Value in Values:
+        #convert long number to short number 1.23232323 -> 1.23
+        ValueStringArray.append(("%.1f" % (Value * 100)).zfill(4))
+
+    ReturnedValueStrings = []
+    for emotionIndex in range(0, len(emotionArray), 2):
+        ReturnedValueStrings.append(ValueStringArray[emotionIndex] + "% " + emotionArray[emotionIndex] + "    " + emotionArray[emotionIndex+1] + " " + ValueStringArray[emotionIndex+1] + "%")
+    return ReturnedValueStrings
+
+    
+def CameraFunction(gui):
     Model.LoadModel(filename="NewWeights.h5")
-    Model.ModelTest()
+    #Model.ModelTest()
     while 1:
         Face = GetFace()
         cv2.imwrite("./picture/test.jpg", Face)
@@ -16,20 +37,22 @@ def CameraFunction():
         Prediction = Model.Predict(FaceArray)
         PredictionList = Prediction.tolist()[0]
         LabelIndex = Prediction.argmax(axis=-1).tolist()[0]
-        print(emotionArray[LabelIndex])
-        print(Prediction)
+        #print(emotionArray[LabelIndex])
 
-emotionArray = ["angry", "contempt", "disgust", "fear", "happy", "neutral", "sad", "suprise"]
+        ConvertedStrings = Convert(PredictionList)
+        
+        gui.GuiRun(ConvertedStrings, emotionArray[LabelIndex], PredictionList)
 
 if __name__ == "__main__":
     Model = FacialDetectionModel()
     Model.Compile(LearningRate=0.001)
-
+    guiS = Gui()
+    guiS.GuiSetup()
     train = False
     if train == True:
         Model.GetHistory()
     if train == False:
-        CameraFunction()
+        CameraFunction(guiS)
 
 
 
